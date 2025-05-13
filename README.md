@@ -96,7 +96,17 @@ After strict virus detection and security verification, it ensures that users wi
 6. Convenient for Collection and Analysis
 It is convenient for TikTok fans to collect their favorite videos for offline viewing. It also provides convenience for video editors who need to obtain materials from TikTok and data analysts who study TikTok trends. It helps them quickly collect the required materials and data.
 
+# Future Plans of the Project
+1. Enhance Download Functions
+Support More Platforms: In addition to Douyin, gradually support content downloads from other mainstream short - video platforms such as Kuaishou and Bilibili, so as to meet users' needs for one - stop acquisition of multi - platform video resources.
+Optimize Download Speed and Stability: Continuously optimize the download algorithm and network connection to increase the download speed and reduce the download failure rate. Especially in poor network environments, stable downloads can still be guaranteed.
 
+2. Improve Watermark Removal Functions
+Enhance Watermark Removal Effect: Constantly improve the watermark removal algorithm to enable it to more accurately identify and remove various complex watermark patterns while ensuring that the quality of videos and pictures is not affected.
+Support Custom Watermark Removal Areas: Allow users to manually select the position and scope of the watermarks to be removed, further improving the flexibility and accuracy of watermark removal.
+
+3. Optimize Interface Design
+Comprehensively redesign the interface of the download tool. Adopt a simple and intuitive design style and simplify the operation process. When new users use it for the first time, they can quickly get started within 1 minute through guided animations and prompts. Add personalized skin settings, enabling users to choose different theme colors and interface layouts according to their preferences and create an exclusive download experience.
 
 ## 🚀 快速开始
 
