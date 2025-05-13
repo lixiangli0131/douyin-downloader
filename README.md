@@ -26,12 +26,11 @@ DouYin Downloader 是一个用于批量下载抖音内容的工具。基于抖�
   - 支持数据持久化到数据库
   - 可根据时间范围过滤
 
-## 🚀 快速开始 <!-- by 李镭雨 -->
+## 🚀 快速开始
 
-### 安装
+### Installation
 
-1. 安装 Python 依赖
-在命令行中进入项目根目录（即包含 requirements.txt 文件的目录），执行以下命令安装所需 Python 依赖：
+1. 安装 Python 依赖：
 ```bash
 pip install -r requirements.txt
 ```
@@ -43,12 +42,19 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```bash
 sudo pip install -r requirements.txt
 ```
+If you encounter network issues during the installation process that result in slow or failed downloads, you can try using domestic mirror sources, such as Tsinghua University's mirror source:
+```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+If a Permission denied error occurs (common in Linux and macOS systems), you can add sudo before the command to elevate permissions, but please note that this may require you to enter your system password:
+```bash
+sudo pip install -r requirements.txt
+```
 
-2. 复制配置文件：
+2. Copy Config File：
 ```bash
 cp config.example.yml config.yml
 ```
-若执行命令提示没有找到 cp 命令（可能出现在 Windows 系统），可以手动将 config.example.yml 文件复制一份，并命名为 config.yml ，放置在项目根目录下。
 
 ### 配置
 
@@ -56,63 +62,18 @@ cp config.example.yml config.yml
 - 下载链接
 - 保存路径
 - Cookie 信息（从浏览器开发者工具获取）
-从浏览器开发者工具获取Cookie步骤:
-1.打开开发者工具(F12)
-2.转到"Application"或"存储"选项卡
-3.选择"Cookies"
-4.复制相关站点的Cookie名称和值
 - 其他下载选项
 
 ### 运行
 
 **方式一：使用配置文件（推荐）**
-在命令行中进入项目根目录，执行以下命令运行：
 ```bash
 python DouYinCommand.py
 ```
-运行过程中，工具将根据 config.yml 文件的配置，自动进行内容下载
 
 **方式二：使用命令行**
-在命令行中进入项目根目录，执行以下命令，其中 -C True 表示启用 Cookie（若不需要 Cookie 可省略），-l 后面接抖音分享链接，-p 后面接下载路径：
 ```bash
 python DouYinCommand.py -C True -l "抖音分享链接" -p "下载路径"
-```
-​
-### 常见的问题及解决方法
-- 运行报错 ModuleNotFoundError：表示缺少某些 Python 模块，确认是否已正确执行 pip install -r requirements.txt 安装依赖，若已安装，检查 Python 环境是否正确，可尝试重新创建并激活虚拟环境后再次安装依赖。​
-- 下载失败提示 Cookie 无效：重新获取最新的 Cookie，确保 Cookie 未过期，并且在复制过程中没有遗漏或添加多余字符。​
-- 下载内容缺失或不完整：检查保存路径是否有足够的磁盘空间，若网络不稳定，可尝试降低线程数或分批下载。
-
-## 📦 项目结构
-
-```
-douyin-downloader/
-├── apiproxy/               # 静态资源
-|   ├── common/
-|   |   ├── __init__.py
-|   |   ├── config.py
-|   |   └── utlis.py 
-|   ├──douyin/
-|   |   ├── __init__.py
-|   |   ├── database.py
-|   |   ├── douyin.py 
-|   |   ├── douyinapi.py
-|   |   ├── download.py
-|   |   ├── result.py
-|   |   └── urls.py 
-|   ├── tiktok/
-|   |   ├── __init__.py
-|   |   └── __init__.py 
-├── docs/
-|   ├──examples.md          #使用实例
-├── img/                    #图片
-├── utlis/ 
-|   ├── logger.py
-├── DouYinCommand.py        #运行
-├── README.md
-├── config.example.yml      # 组件
-├── config.yml
-└── requirements.txt
 ```
 
 ## 使用交流群
