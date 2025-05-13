@@ -26,67 +26,68 @@ DouYin Downloader 是一个用于批量下载抖音内容的工具。基于抖�
   - 支持数据持久化到数据库
   - 可根据时间范围过滤
 
-## 🚀 Getting Started <!-- by 李镭雨 -->
+## 🚀 快速开始 <!-- by 李镭雨 -->
 
-### Installation
+### 安装
 
-1. Install Python Dependencies
-Navigate to the project root directory in the command line (the directory containing the requirements.txt file) and run the following command to install the required Python dependencies:
+1. 安装 Python 依赖
+在命令行中进入项目根目录（即包含 requirements.txt 文件的目录），执行以下命令安装所需 Python 依赖：
 ```bash
 pip install -r requirements.txt
 ```
-If you encounter network issues during the installation process that result in slow or failed downloads, you can try using domestic mirror sources, such as Tsinghua University's mirror source:
+如果在安装过程中遇到网络问题，导致下载缓慢或失败，您可以尝试使用国内的镜像源，例如使用清华大学的镜像源：
 ```bash
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
-If a Permission denied error occurs (common in Linux and macOS systems), you can add sudo before the command to elevate permissions, but please note that this may require you to enter your system password:
+若出现 Permission denied 权限错误（常见于 Linux 和 macOS 系统），可以在命令前添加 sudo 提升权限，但请注意，这可能需要您输入系统密码：
 ```bash
 sudo pip install -r requirements.txt
 ```
 
-2. Copy Config File：
+2. 复制配置文件：
 ```bash
 cp config.example.yml config.yml
 ```
-If the command prompt does not find the cp command (which may occur in Windows systems), you can manually copy the config.example.yml file and rename it to config.yml, placing it in the project's root directory.
+若执行命令提示没有找到 cp 命令（可能出现在 Windows 系统），可以手动将 config.example.yml 文件复制一份，并命名为 config.yml ，放置在项目根目录下。
 
-### Configuration
+### 配置
 
-Edit config.yml to set：
-- Download URLs
-- Save path
-- Cookie (from browser DevTools)
-Cookie Retrieval Steps:
-1.Press F12 → DevTools
-2.Go to Application/Storage tab
-3.Select "Cookies"
-4.Copy target site's cookie names/values
+编辑 `config.yml` 文件，设置：
+- 下载链接
+- 保存路径
+- Cookie 信息（从浏览器开发者工具获取）
+从浏览器开发者工具获取Cookie步骤:
+1.打开开发者工具(F12)
+2.转到"Application"或"存储"选项卡
+3.选择"Cookies"
+4.复制相关站点的Cookie名称和值
+- 其他下载选项
 
-### Execution
+### 运行
 
-**Method 1: Config File (Recommended)**
-Enter the project root directory in the command line and execute the following command to run.：
+**方式一：使用配置文件（推荐）**
+在命令行中进入项目根目录，执行以下命令运行：
 ```bash
 python DouYinCommand.py
 ```
-During the operation, the tool will automatically download content according to the configuration in the config.yml file.
+运行过程中，工具将根据 config.yml 文件的配置，自动进行内容下载
 
-**Method 2: CLI Arguments**
-Enter the project root directory in the command line and execute the following command, where -C True means to enable cookies (which can be omitted if cookies are not needed), -l is followed by the Douyin share link, and -p is followed by the download path.：
+**方式二：使用命令行**
+在命令行中进入项目根目录，执行以下命令，其中 -C True 表示启用 Cookie（若不需要 Cookie 可省略），-l 后面接抖音分享链接，-p 后面接下载路径：
 ```bash
 python DouYinCommand.py -C True -l "抖音分享链接" -p "下载路径"
 ```
 ​
-### Troubleshooting
-- Runtime error ModuleNotFoundError: indicates that some Python modules are missing. Confirm whether you have correctly executed 'pip install -r requirements.txt' to install the dependencies. If they are already installed, check if the Python environment is correct. You can try recreating and activating the virtual environment, then install the dependencies again.
-- Download failed prompt: Cookie is invalid: re-obtain the latest Cookie, ensure that the Cookie has not expired, and make sure there are no missing or extra characters during the copying process.
-- Download content is missing or incomplete: Check if there is enough disk space in the save path. If the network is unstable, try reducing the number of threads or downloading in batches.
+### 常见的问题及解决方法
+- 运行报错 ModuleNotFoundError：表示缺少某些 Python 模块，确认是否已正确执行 pip install -r requirements.txt 安装依赖，若已安装，检查 Python 环境是否正确，可尝试重新创建并激活虚拟环境后再次安装依赖。​
+- 下载失败提示 Cookie 无效：重新获取最新的 Cookie，确保 Cookie 未过期，并且在复制过程中没有遗漏或添加多余字符。​
+- 下载内容缺失或不完整：检查保存路径是否有足够的磁盘空间，若网络不稳定，可尝试降低线程数或分批下载。
 
-## 📦 Project Structure
+## 📦 项目结构
 
 ```
 douyin-downloader/
-├── apiproxy/               # Core modules
+├── apiproxy/               # 静态资源
 |   ├── common/
 |   |   ├── __init__.py
 |   |   ├── config.py
@@ -95,23 +96,23 @@ douyin-downloader/
 |   |   ├── __init__.py
 |   |   ├── database.py
 |   |   ├── douyin.py 
-|   |   ├── douyinapi.py   #API handler
-|   |   ├── download.py    #Multithreaded downloader
+|   |   ├── douyinapi.py
+|   |   ├── download.py
 |   |   ├── result.py
 |   |   └── urls.py 
 |   ├── tiktok/
 |   |   ├── __init__.py
 |   |   └── __init__.py 
 ├── docs/
-|   ├──examples.md          #Usage examples
-├── img/                    
+|   ├──examples.md          #使用实例
+├── img/                    #图片
 ├── utlis/ 
-|   ├── logger.py           #Logging system (debug levels)
-├── DouYinCommand.py        #Main entry
+|   ├── logger.py
+├── DouYinCommand.py        #运行
 ├── README.md
-├── config.example.yml      #Component
-├── config.yml              #User config
-└── requirements.txt        # Dependencies
+├── config.example.yml      # 组件
+├── config.yml
+└── requirements.txt
 ```
 
 ## 使用交流群
