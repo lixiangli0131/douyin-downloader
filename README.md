@@ -4,7 +4,7 @@
 
 DouYin Downloader 是一个用于批量下载抖音内容的工具。基于抖音 API 实现，支持命令行参数或 YAML 配置文件方式运行，可满足大部分抖音内容的下载需求。
 
-## ✨ 特性
+## ✨ 项目特点
 
 - **多种内容支持**
   - 视频、图集、音乐、直播信息下载
@@ -26,38 +26,92 @@ DouYin Downloader 是一个用于批量下载抖音内容的工具。基于抖�
   - 支持数据持久化到数据库
   - 可根据时间范围过滤
 
-## 🚀 快速开始
+## 🚀 Getting Started <!-- by 李镭雨 -->
 
-### 安装
+### Installation
 
-1. 安装 Python 依赖：
+1. Install Python Dependencies
+Navigate to the project root directory in the command line (the directory containing the requirements.txt file) and run the following command to install the required Python dependencies:
 ```bash
 pip install -r requirements.txt
 ```
+If you encounter network issues during the installation process that result in slow or failed downloads, you can try using domestic mirror sources, such as Tsinghua University's mirror source:
+```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+If a Permission denied error occurs (common in Linux and macOS systems), you can add sudo before the command to elevate permissions, but please note that this may require you to enter your system password:
+```bash
+sudo pip install -r requirements.txt
+```
 
-2. 复制配置文件：
+2. Copy Config File：
 ```bash
 cp config.example.yml config.yml
 ```
+If the command prompt does not find the cp command (which may occur in Windows systems), you can manually copy the config.example.yml file and rename it to config.yml, placing it in the project's root directory.
 
-### 配置
+### Configuration
 
-编辑 `config.yml` 文件，设置：
-- 下载链接
-- 保存路径
-- Cookie 信息（从浏览器开发者工具获取）
-- 其他下载选项
+Edit config.yml to set：
+- Download URLs
+- Save path
+- Cookie (from browser DevTools)
+Cookie Retrieval Steps:
+1.Press F12 → DevTools
+2.Go to Application/Storage tab
+3.Select "Cookies"
+4.Copy target site's cookie names/values
 
-### 运行
+### Execution
 
-**方式一：使用配置文件（推荐）**
+**Method 1: Config File (Recommended)**
+Enter the project root directory in the command line and execute the following command to run.：
 ```bash
 python DouYinCommand.py
 ```
+During the operation, the tool will automatically download content according to the configuration in the config.yml file.
 
-**方式二：使用命令行**
+**Method 2: CLI Arguments**
+Enter the project root directory in the command line and execute the following command, where -C True means to enable cookies (which can be omitted if cookies are not needed), -l is followed by the Douyin share link, and -p is followed by the download path.：
 ```bash
 python DouYinCommand.py -C True -l "抖音分享链接" -p "下载路径"
+```
+​
+### Troubleshooting
+- Runtime error ModuleNotFoundError: indicates that some Python modules are missing. Confirm whether you have correctly executed 'pip install -r requirements.txt' to install the dependencies. If they are already installed, check if the Python environment is correct. You can try recreating and activating the virtual environment, then install the dependencies again.
+- Download failed prompt: Cookie is invalid: re-obtain the latest Cookie, ensure that the Cookie has not expired, and make sure there are no missing or extra characters during the copying process.
+- Download content is missing or incomplete: Check if there is enough disk space in the save path. If the network is unstable, try reducing the number of threads or downloading in batches.
+
+## 📦 Project Structure
+
+```
+douyin-downloader/
+├── apiproxy/               # Core modules
+|   ├── common/
+|   |   ├── __init__.py
+|   |   ├── config.py
+|   |   └── utlis.py 
+|   ├──douyin/
+|   |   ├── __init__.py
+|   |   ├── database.py
+|   |   ├── douyin.py 
+|   |   ├── douyinapi.py   #API handler
+|   |   ├── download.py    #Multithreaded downloader
+|   |   ├── result.py
+|   |   └── urls.py 
+|   ├── tiktok/
+|   |   ├── __init__.py
+|   |   └── __init__.py 
+├── docs/
+|   ├──examples.md          #Usage examples
+├── img/                    
+├── utlis/ 
+|   ├── logger.py           #Logging system (debug levels)
+├── DouYinCommand.py        #Main entry
+├── README.md
+├── config.example.yml      #Component
+├── config.yml              #User config
+└── requirements.txt        # Dependencies
 ```
 
 ## 使用交流群
