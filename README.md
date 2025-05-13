@@ -207,3 +207,93 @@ python DouYinCommand.py -C True -l "链接1" -l "链接2" -p "./downloads"
 
 [MIT](https://opensource.org/licenses/MIT) 
 
+<!-- 邹爱华主要功能使用教程 -->
+（one） Configuration file format
+Process: By creating and editing the config. yml configuration file, it is easy to manage download parameters.
+Basic configuration: Set download link, save path, and download options (such as music, cover, avatar, etc.).
+Download link: Supports work links or user homepage links.
+Save Path: Specify the storage directory for the downloaded file.
+Download options: You can choose whether to download music, cover, avatar, and save JSON data.
+Time range filtering: Only download works within a specific time range.
+Incremental Update: Supports incremental updates for publishing works, collections, etc.
+Quantity limit: Limit the number of downloaded works, such as the latest 10 released works.
+This is a complete configuration file and instructions of the Tiktok video download tool. Let me analyze the functions and implementation logic of each part in detail:
+#Download link
+link:
+- " https://v.douyin.com/xxxxx/ # Work Link
+- " https://www.douyin.com/user/xxxxx # User homepage
+#Save Path
+path: "./downloads"
+#Download Options
+Music: true # Download video soundtrack (MP3 format)
+Cover: true # Download video cover (JPG/PNG)
+Avatar: true # Download author avatar (valid in user homepage mode)
+JSON: true # Save video metadata (author information, publication time, etc.)
+Execute the following command:
+python DouYinCommand.py
+#Time range filtering
+Only download works within the specified time range
+Start_time: "2023-01-01" # Start time
+End_time: "2023-12-31" # End time
+#Or use 'now' to indicate the current time
+end_time: "now"
+#Incremental update
+increase:
+Post: true # Skip downloaded published works
+Like: false # Always download liked works (without checking for duplicates)
+Mix: true # Skip downloaded collection content
+#Quantity restriction strategy
+number:
+Post: 10 # Retrieve 10 items in reverse order of publication time
+Like: 5 # Download up to 5 like works
+Mix: 3 # Only 3 videos per collection
+（two） Command line mode
+Single video: Download a single work.
+User homepage: Download works posted or liked by users, supporting simultaneous downloading of multiple types.
+Collection: Download the specified collection or all collections of the user.
+Custom save options: You can set not to download music, cover art, or customize the save path.
+Batch Download: Supports multi link batch download and multi-threaded acceleration.
+#Download a single video
+python DouYinCommand.py -C True -l " https://v.douyin.com/xxxxx/ "
+Download user homepage works
+#Download and publish works
+python DouYinCommand.py -C True -l " https://www.douyin.com/user/xxxxx " -M post
+#Download and like works
+python DouYinCommand.py -C True -l " https://www.douyin.com/user/xxxxx " -M like
+#Simultaneously download, publish, and like works
+python DouYinCommand.py -C True -l " https://www.douyin.com/user/xxxxx " -M post -M like
+Download Collection
+#Download a single collection
+python DouYinCommand.py -C True -l " https://www.douyin.com/collection/xxxxx "
+#Download all user collections
+python DouYinCommand.py -C True -l " https://www.douyin.com/user/xxxxx " -M mix
+Customize save options
+#Do not download music and covers
+Python DouYinCommander. py - C True - l "Link" - m False - c False
+#Customize save path
+Python DouYinCommand. py - C True - l "Link" - p "./mydownloads
+Batch download
+#Download multiple links
+Python DouYinCommander. py - C True - l "Link 1" - l "Link 2" - l "Link 3"
+#Using multithreading
+Python DouYinCommander. py - C True - l "Link" - t 10
+（three）. Advanced usage
+Cookie settings: Resolve access restriction issues.
+Database support: Enable the database to support incremental updates.
+Folder style: Control whether to create separate folders for each work.
+Cookie settings: (Anti crawling)
+#Cookie settings
+If you encounter access restrictions, you can set cookies:
+#Configuration file format:
+cookies:
+MsToken: "xxx" # Dynamic Token
+Ttwid: "xxx" # Device Fingerprint
+Odin_tt: "xxx" # User ID
+#Command line method:
+Python DouYinCommand. py - C True - l "Link" - cookie "msToken=xxx;  ttwid=xxx; "
+#Database support
+#Enable database to support incremental updates:
+database: true
+#Folder Style
+#Control file saving structure:
+Folderstyle: true # Create a separate folder for each work
