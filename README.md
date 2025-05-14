@@ -26,6 +26,7 @@ DouYin Downloader 是一个用于批量下载抖音内容的工具。基于抖�
   - 支持数据持久化到数据库
   - 可根据时间范围过滤
 
+
 <!-- 刘涵潇项目介绍 -->
 # Project Background
 1. Market Level
@@ -109,13 +110,21 @@ Support Custom Watermark Removal Areas: Allow users to manually select the posit
 Comprehensively redesign the interface of the download tool. Adopt a simple and intuitive design style and simplify the operation process. When new users use it for the first time, they can quickly get started within 1 minute through guided animations and prompts. Add personalized skin settings, enabling users to choose different theme colors and interface layouts according to their preferences and create an exclusive download experience.
 
 ## 🚀 Getting Started <!-- by 李镭雨 -->
+## 🚀 快速开始
 
 ### Installation
 
-1. Install Python Dependencies
-Navigate to the project root directory in the command line (the directory containing the requirements.txt file) and run the following command to install the required Python dependencies:
+1. 安装 Python 依赖：
 ```bash
 pip install -r requirements.txt
+```
+如果在安装过程中遇到网络问题，导致下载缓慢或失败，您可以尝试使用国内的镜像源，例如使用清华大学的镜像源：
+```bash
+pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+```
+若出现 Permission denied 权限错误（常见于 Linux 和 macOS 系统），可以在命令前添加 sudo 提升权限，但请注意，这可能需要您输入系统密码：
+```bash
+sudo pip install -r requirements.txt
 ```
 If you encounter network issues during the installation process that result in slow or failed downloads, you can try using domestic mirror sources, such as Tsinghua University's mirror source:
 ```bash
@@ -130,70 +139,25 @@ sudo pip install -r requirements.txt
 ```bash
 cp config.example.yml config.yml
 ```
-If the command prompt does not find the cp command (which may occur in Windows systems), you can manually copy the config.example.yml file and rename it to config.yml, placing it in the project's root directory.
 
-### Configuration
+### 配置
 
-Edit config.yml to set：
-- Download URLs
-- Save path
-- Cookie (from browser DevTools)
-Cookie Retrieval Steps:
-1.Press F12 → DevTools
-2.Go to Application/Storage tab
-3.Select "Cookies"
-4.Copy target site's cookie names/values
+编辑 `config.yml` 文件，设置：
+- 下载链接
+- 保存路径
+- Cookie 信息（从浏览器开发者工具获取）
+- 其他下载选项
 
-### Execution
+### 运行
 
-**Method 1: Config File (Recommended)**
-Enter the project root directory in the command line and execute the following command to run.：
+**方式一：使用配置文件（推荐）**
 ```bash
 python DouYinCommand.py
 ```
-During the operation, the tool will automatically download content according to the configuration in the config.yml file.
 
-**Method 2: CLI Arguments**
-Enter the project root directory in the command line and execute the following command, where -C True means to enable cookies (which can be omitted if cookies are not needed), -l is followed by the Douyin share link, and -p is followed by the download path.：
+**方式二：使用命令行**
 ```bash
 python DouYinCommand.py -C True -l "抖音分享链接" -p "下载路径"
-```
-​
-### Troubleshooting
-- Runtime error ModuleNotFoundError: indicates that some Python modules are missing. Confirm whether you have correctly executed 'pip install -r requirements.txt' to install the dependencies. If they are already installed, check if the Python environment is correct. You can try recreating and activating the virtual environment, then install the dependencies again.
-- Download failed prompt: Cookie is invalid: re-obtain the latest Cookie, ensure that the Cookie has not expired, and make sure there are no missing or extra characters during the copying process.
-- Download content is missing or incomplete: Check if there is enough disk space in the save path. If the network is unstable, try reducing the number of threads or downloading in batches.
-
-## 📦 Project Structure
-
-```
-douyin-downloader/
-├── apiproxy/               # Core modules
-|   ├── common/
-|   |   ├── __init__.py
-|   |   ├── config.py
-|   |   └── utlis.py 
-|   ├──douyin/
-|   |   ├── __init__.py
-|   |   ├── database.py
-|   |   ├── douyin.py 
-|   |   ├── douyinapi.py   #API handler
-|   |   ├── download.py    #Multithreaded downloader
-|   |   ├── result.py
-|   |   └── urls.py 
-|   ├── tiktok/
-|   |   ├── __init__.py
-|   |   └── __init__.py 
-├── docs/
-|   ├──examples.md          #Usage examples
-├── img/                    
-├── utlis/ 
-|   ├── logger.py           #Logging system (debug levels)
-├── DouYinCommand.py        #Main entry
-├── README.md
-├── config.example.yml      #Component
-├── config.yml              #User config
-└── requirements.txt        # Dependencies
 ```
 
 ## 使用交流群
